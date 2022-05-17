@@ -23,6 +23,7 @@ class ElectronicItems extends Model
     {
         $sorted = array();
         foreach ($this->items as $item) {
+            //FIXME: this will overwrite items with the same price
             $sorted[($item->price * 100)] = $item;
         }
         return ksort($sorted, SORT_NUMERIC);
