@@ -19,14 +19,15 @@ class ElectronicItems extends Model
      *
      * @return array
      */
-    public function getSortedItems($type)
+    public function getSortedItems()
     {
         $sorted = array();
         foreach ($this->items as $item) {
-            //FIXME: this will overwrite items with the same price
-            $sorted[($item->price * 100)] = $item;
+            //FIXME: this will overwrite items with the same price, use multidimentional array to avoid and then merge
+            $sorted[($item->getTotalPrice() * 100)][] = $item;
         }
-        return ksort($sorted, SORT_NUMERIC);
+        ksort($sorted, SORT_NUMERIC);
+        return call_user_func_array('array_merge', array_values($sorted));
     }
     /**
      *
@@ -42,5 +43,13 @@ class ElectronicItems extends Model
             $items = array_filter($this->items, $callback);
         }
         return false;
+    }
+
+    /**
+     * Return items
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }
