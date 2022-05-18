@@ -9,9 +9,8 @@ class Television extends ElectronicItem
     use HasFactory;
     const MAX_EXTRAS = PHP_INT_MAX;
 
-
-    function __construct($items = null)
+    function __construct($arg = [], $extras = null)
     {
-        parent::__construct(Self::MAX_EXTRAS, $items);
+        parent::__construct(Self::MAX_EXTRAS, $arg, $extras);
     }
 }

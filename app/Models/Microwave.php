@@ -10,8 +10,8 @@ class Microwave extends ElectronicItem
 
     const MAX_EXTRAS = 0;
 
-    function __construct()
+    function __construct($arg = [])
     {
-        parent::__construct(Self::MAX_EXTRAS, null);
+        parent::__construct(Self::MAX_EXTRAS, $arg);
     }
 }

@@ -11,8 +11,8 @@ class Console extends ElectronicItem
 
     const MAX_EXTRAS = 4;
 
-    function __construct($items = null)
+    function __construct($arg = [], $extras = null)
     {
-        parent::__construct(Self::MAX_EXTRAS, $items);
+        parent::__construct(Self::MAX_EXTRAS, $arg, $extras);
     }
 }
