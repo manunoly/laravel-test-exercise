@@ -6,7 +6,7 @@ use ErrorException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ElectronicItem extends Model
+abstract class ElectronicItem extends Model
 {
     use HasFactory;
     /**
@@ -20,7 +20,7 @@ class ElectronicItem extends Model
     /**
      * @var ElectronicItems
      */
-    private $itemList;
+    private $extrasList;
     /**
      * @var int
      */
@@ -30,22 +30,40 @@ class ElectronicItem extends Model
     const ELECTRONIC_ITEM_TELEVISION = 'television';
     const ELECTRONIC_ITEM_CONSOLE = 'console';
     const ELECTRONIC_ITEM_MICROWAVE = 'microwave';
+    const ELECTRONIC_ITEM_CONTROLLER = 'controller';
     public static $types = array(
         self::ELECTRONIC_ITEM_CONSOLE,
-        self::ELECTRONIC_ITEM_MICROWAVE, self::ELECTRONIC_ITEM_TELEVISION
+        self::ELECTRONIC_ITEM_MICROWAVE,
+        self::ELECTRONIC_ITEM_TELEVISION,
+        self::ELECTRONIC_ITEM_CONTROLLER
     );
 
-    function __construct($maxExtras, $items = null)
+    function __construct($maxExtras, $arg = [], $extras = null)
     {
-        $this->maxExtras = $maxExtras;
-        if ($maxExtras && $items) {
-            if ('array' != gettype($items)) {
-                throw new ErrorException('Not valid items input, items must be array');
+        foreach ($arg as $key => $value) {
+            switch ($key) {
+                case 'price':
+                    $this->price = $value;
+                    break;
+                case 'type':
+                    $this->type = $value;
+                    break;
+                case 'wired':
+                    $this->wired = $value;
+                    break;
+                default:
+                    break;
             }
-            if (count($items) > $maxExtras) {
+        }
+        $this->maxExtras = $maxExtras;
+        if ($maxExtras && $extras) {
+            if ('array' != gettype($extras)) {
+                throw new ErrorException('Not valid items input, items must be an array');
+            }
+            if (count($extras) > $maxExtras) {
                 throw new ErrorException('To many items as input');
             }
-            $this->itemList =  new ElectronicItems($items);
+            $this->extrasList = new ElectronicItems($extras);
         }
     }
 
@@ -82,5 +100,33 @@ class ElectronicItem extends Model
     function getMaxExtras()
     {
         return $this->maxExtras;
+    }
+
+    function getTotalPrice()
+    {
+        $price = $this->getPrice();
+        if (isset($this->extrasList)) {
+            foreach ($this->extrasList->getItems() as $item) {
+                $price += $item->getPrice();
+            }
+        }
+        return $price;
+    }
+
+    /**
+     * Return data as json
+     * overwrite method to return object data
+     */
+    public function jsonSerialize()
+    {
+        $data = [
+            'price' => $this->getPrice(),
+            'type' => $this->getType(),
+            'wired' => $this->getWired(),
+            'totalPrice' => $this->getTotalPrice(),
+            'extras' => $this->extrasList ? $this->extrasList->getItems() : ''
+        ];
+
+        return $data;
     }
 }
