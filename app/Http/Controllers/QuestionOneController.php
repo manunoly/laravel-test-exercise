@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataInput;
 use Illuminate\Http\Request;
 
 class QuestionOneController extends Controller
@@ -10,7 +11,7 @@ class QuestionOneController extends Controller
     {
         return response()->json([
             'message' => 'Success scenario number one',
-            'data' => '',
+            'data' => DataInput::generateDataScenarioOne(),
         ]);
     }
 }
