@@ -52,4 +52,15 @@ class ElectronicItems extends Model
     {
         return $this->items;
     }
+
+    /**
+     * Return items
+     */
+    public function getTotalPrice()
+    {
+        return array_reduce($this->items, function ($total, $item) {
+            $total += $item->getTotalPrice();
+            return $total;
+        });
+    }
 }

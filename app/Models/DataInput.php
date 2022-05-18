@@ -64,6 +64,8 @@ class DataInput
             self::generateMicrowaveData()
         ];
         $sortData = new ElectronicItems($data);
-        return $sortData->getSortedItems();
+        $finalData['totalPrice'] = $sortData->getTotalPrice();
+        $finalData['items'] = $sortData->getSortedItems();
+        return $finalData;
     }
 }
