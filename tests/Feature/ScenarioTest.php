@@ -116,7 +116,7 @@ class ScenarioTest extends TestCase
      *
      * @return void
      */
-    public function test_login_fail_password_response()
+    public function test_login_fail_bad_password_response()
     {
         App::loadEnvironmentFrom('.env');
         $user = env('DUMMY_USER');
