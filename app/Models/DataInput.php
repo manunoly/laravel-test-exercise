@@ -5,6 +5,9 @@ namespace App\Models;
 class DataInput
 {
 
+    /**
+     * Generate Television data
+     */
     public static function generateTelevisionData($extras = []): Television
     {
         $data = [
@@ -16,6 +19,9 @@ class DataInput
         return new Television($data, $extras);
     }
 
+    /**
+     * Generate Console data
+     */
     public static function generateConsoleData($extras = []): Console
     {
         $data = [
@@ -27,6 +33,9 @@ class DataInput
         return new Console($data, $extras);
     }
 
+    /**
+     * Generate Microwave data
+     */
     public static function generateMicrowaveData(): Microwave
     {
         $data = [
@@ -38,6 +47,9 @@ class DataInput
         return new Microwave($data);
     }
 
+    /**
+     * Generate Controller data
+     */
     public static function generateControllerData($wire = true): Controller
     {
         $data = [
@@ -49,7 +61,10 @@ class DataInput
         return new Controller($data);
     }
 
-    public static function generateDataScenarioOne()
+    /**
+     * Generate static data for scenarios
+     */
+    public static function generateData(): array
     {
         self::generateConsoleData();
         self::generateTelevisionData();
@@ -63,9 +78,32 @@ class DataInput
             self::generateTelevisionData([self::generateControllerData(false)]),
             self::generateMicrowaveData()
         ];
+        return $data;
+    }
+
+    /**
+     * Generate Scenario one
+     */
+    public static function generateDataScenarioOne(): array
+    {
+        $data = self::generateData();
         $sortData = new ElectronicItems($data);
-        $finalData['totalPrice'] = $sortData->getTotalPrice();
         $finalData['items'] = $sortData->getSortedItems();
+        $finalData['totalPrice'] = $sortData->getTotalPrice();
+        return $finalData;
+    }
+
+    /**
+     * Generate Scenario two
+     */
+    public static function generateDataScenarioTwo($type): array
+    {
+        $data = self::generateData();
+        $sortData = new ElectronicItems($data);
+        $filterDataByType = $sortData->getItemsByType($type);
+        $sortData = new ElectronicItems([$filterDataByType]);
+        $finalData['items'] = $sortData->getSortedItems();
+        $finalData['totalPrice'] = $sortData->getTotalPrice();
         return $finalData;
     }
 }

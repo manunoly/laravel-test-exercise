@@ -23,26 +23,29 @@ class ElectronicItems extends Model
     {
         $sorted = array();
         foreach ($this->items as $item) {
-            //FIXME: this will overwrite items with the same price, use multidimentional array to avoid and then merge
             $sorted[($item->getTotalPrice() * 100)][] = $item;
         }
         ksort($sorted, SORT_NUMERIC);
-        return call_user_func_array('array_merge', array_values($sorted));
+        if (count($sorted)) {
+            return call_user_func_array('array_merge', array_values($sorted));
+        }
+        return [];
     }
     /**
-     *
+     * Filter items by type
      * @param string $type
      * @return array
      */
     public function getItemsByType($type)
     {
+        $items = [];
         if (in_array($type, ElectronicItem::$types)) {
             $callback = function ($item) use ($type) {
-                return $item->type == $type;
+                return $item->getType() == $type;
             };
             $items = array_filter($this->items, $callback);
         }
-        return false;
+        return array_values($items);
     }
 
     /**
@@ -54,10 +57,13 @@ class ElectronicItems extends Model
     }
 
     /**
-     * Return items
+     * Return total price
      */
-    public function getTotalPrice()
+    public function getTotalPrice(): float
     {
+        if (!$this->items || !count($this->items)) {
+            return 0;
+        }
         return array_reduce($this->items, function ($total, $item) {
             $total += $item->getTotalPrice();
             return $total;
