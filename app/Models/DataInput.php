@@ -101,9 +101,20 @@ class DataInput
         $data = self::generateData();
         $sortData = new ElectronicItems($data);
         $filterDataByType = $sortData->getItemsByType($type);
-        $sortData = new ElectronicItems([$filterDataByType]);
+        $sortData = new ElectronicItems($filterDataByType);
         $finalData['items'] = $sortData->getSortedItems();
         $finalData['totalPrice'] = $sortData->getTotalPrice();
         return $finalData;
+    }
+
+    /**
+     * Generate types
+     */
+    public static function generateDataTypes(): array
+    {
+        $data = array_map(function ($type) {
+            return ['type' => $type];
+        }, ElectronicItem::$types);
+        return $data;
     }
 }

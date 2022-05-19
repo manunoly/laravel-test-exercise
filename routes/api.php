@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\QuestionOneController;
 use App\Http\Controllers\QuestionTwoController;
-use GrahamCampbell\ResultType\Success;
+use App\Http\Controllers\TypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('types', [TypeController::class, 'getTypes']);
 
 Route::middleware('auth.basic')->get('/test', function (Request $request) {
     return response()->json(['success' => 'true']);
