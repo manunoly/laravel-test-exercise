@@ -76,4 +76,55 @@ class ScenarioTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_login_success_response()
+    {
+        App::loadEnvironmentFrom('.env');
+        $user = env('DUMMY_USER');
+        $response = $this->postJson('/api/login', [
+            'email' => $user,
+            'password' => 'welovetracktik'
+        ]);
+
+        $response->assertStatus(200);
+    }
+
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_login_fail_missing_password_parameter()
+    {
+        App::loadEnvironmentFrom('.env');
+        $user = env('DUMMY_USER');
+        $response = $this->postJson('/api/login', [
+            'email' => $user,
+        ]);
+
+        $response->assertStatus(400);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_login_fail_password_response()
+    {
+        App::loadEnvironmentFrom('.env');
+        $user = env('DUMMY_USER');
+        $response = $this->postJson('/api/login', [
+            'email' => $user,
+            'password' => 'wedonotlovetracktik'
+        ]);
+
+        $response->assertStatus(403);
+    }
 }
