@@ -27,8 +27,8 @@ class AuthenticateWithBearerToken extends Middleware
         if ($token === env('DUMMY_TOKEN', '')) {
             return $next($request);
         }
-        header('HTTP/1.1 401 Authorization Required');
-        header('WWW-Authenticate: Basic realm="Access denied"');
-        exit;
+        return response()->json([
+            'message' => 'Forbidden'
+        ], 403);
     }
 }

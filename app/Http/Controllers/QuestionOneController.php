@@ -8,6 +8,24 @@ use Illuminate\Http\Request;
 
 class QuestionOneController extends Controller
 {
+    /**
+     * @OA\GET(
+     * path="/api/question/one",
+     * operationId="Scenario",
+     * tags={"Question"},
+     * summary="Question one",
+     * security={{"bearer_token":{}}},
+     * description="Question one here",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success Scenario one",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+
+     */
     public function scenario(Request $request)
     {
         try {
