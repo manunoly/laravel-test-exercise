@@ -149,7 +149,7 @@ return [
             'securitySchemes' => [
                 'bearer_token' => [ // Unique name of security
                     'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
-                    'description' => 'PASTE THIS INTO THE INPUT BELOW => <b>Bearer dummytokenjustforexample</b>  <br /> If you change de token from the .env, please paste usgin de previus format',
+                    'description' => 'PASTE THIS INTO THE INPUT BELOW => <b>Bearer dummytokenjustforexample</b>  <br /> If you change de token from the .env, please paste using the previous format',
                     'name' => 'Authorization', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                  ],
