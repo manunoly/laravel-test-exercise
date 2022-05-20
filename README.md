@@ -14,10 +14,16 @@ Solution
 - To config the solution clone the project from [repository](https://github.com/manunoly/laravel-test-exercise) and [copy .env.example to .env](https://github.com/manunoly/laravel-test-exercise/blob/main/.env.example) in your project directory.
 - Solution was developed using [Laravel with Rest API](https://laravel.com).
 - Using[ OpenAPI Specification](https://www.openapis.org/) for documentation with [swagger](https://github.com/DarkaOnLine/L5-Swagger) package for laravel.
-- To access project documentations please go to [this page](http://localhost:8000/api/documentation).
-- Be sure you config the _Authorize_ token to access protected REST API
+- - To access project documentations please go to [this page](http://localhost:8000/api/documentation).
+- - Be sure you config the _Authorize_ token to access protected REST API in the documentation
+- A postman collection file is provide in the project file name is Laravel Test.postman_collection.json
+- - Be sure you config postman variable with server and use bearer token to access protected REST API
+- - Use static token provide by .env.example
 
 ## Frontend Skills
 
 I created a demo frontend project with [Angular](https://angular.io/) to show frontend skills using [Ionic Framework](https://ionicframework.com/), 
 ### [Frontend Project Here](https://github.com/manunoly/frontend-challenge-manuel-almaguer)
+
+
+## Happy Coding!!!
