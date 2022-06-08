@@ -19,6 +19,8 @@ Solution
 - A postman collection file is provide in the project file name is Laravel Test.postman_collection.json
 - - Be sure you config postman variable with server and use bearer token to access protected REST API
 - - Use static token provide by .env.example
+- Use *php artisan serve* to run the server and *php artisan test* to run the implemented test cases
+- Atomic commits are use to make it easier to track code history
 
 ## Frontend Skills
 
