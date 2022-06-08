@@ -169,12 +169,12 @@
 					"formdata": [
 						{
 							"key": "email",
-							"value": "welove@tracktik.com",
+							"value": "welove@code.com",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "welovetracktik",
+							"value": "welovecode",
 							"type": "text"
 						}
 					]

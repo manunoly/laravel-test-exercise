@@ -26,7 +26,7 @@ class AuthenticateWithBasicAuth extends Middleware
         header('Cache-Control: no-cache, must-revalidate, max-age=0');
         $serverAuthUser = $_SERVER['PHP_AUTH_USER'] ?? '';
         $serverAuthPw = $_SERVER['PHP_AUTH_PW'] ?? '';
-        if ($serverAuthUser == 'welove@tracktik.com' && Hash::check($serverAuthPw, env('DUMMY_PASS', ''))) {
+        if ($serverAuthUser == 'welove@code.com' && Hash::check($serverAuthPw, env('DUMMY_PASS', ''))) {
             return $next($request);
         }
         header('HTTP/1.1 401 Authorization Required');

@@ -88,7 +88,7 @@ class ScenarioTest extends TestCase
         $user = env('DUMMY_USER');
         $response = $this->postJson('/api/login', [
             'email' => $user,
-            'password' => 'welovetracktik'
+            'password' => 'welovecode'
         ]);
 
         $response->assertStatus(200);
@@ -122,7 +122,7 @@ class ScenarioTest extends TestCase
         $user = env('DUMMY_USER');
         $response = $this->postJson('/api/login', [
             'email' => $user,
-            'password' => 'wedonotlovetracktik'
+            'password' => 'wedonotlovecode'
         ]);
 
         $response->assertStatus(403);

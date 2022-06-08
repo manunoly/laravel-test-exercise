@@ -14,7 +14,7 @@ class LoginController extends Controller
      * operationId="authLogin",
      * tags={"Login"},
      * summary="User Login",
-     * description="Login User Here, default user: <b>welove@tracktik.com</b>,  password: <b>welovetracktik</b> ",
+     * description="Login User Here, default user: <b>welove@code.com</b>,  password: <b>welovecode</b> ",
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
